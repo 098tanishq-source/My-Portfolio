@@ -1,43 +1,43 @@
-export const feedbackH1LG = [
+ export const feedbackH1LG = [
     [
-        "Staying at Capsules® in the",
-        "California desert redefined my",
-        "retreat — modern design meets",
-        "nature, and every sunset feels",
-        "like a serene masterpiece."
+        "Clean, modern interfaces",
+        "built with attention to",
+        "spacing, typography and",
+        "responsive layouts that",
+        "work on every device."
     ],
     [
-        "Capsules® offered the perfect",
-        "escape — sleek, modern spaces",
-        "surrounded by desert stillness.",
-        "Each moment felt peaceful,",
-        "grounded, and truly unique."
+        "Every project starts with",
+        "understanding the brand",
+        "tone and audience before",
+        "a single line of code or",
+        "design is created."
     ],
     [
-        "Capsules® was the perfect",
-        "desert hideaway — stylish,",
-        "peaceful, and fully surrounded",
-        "by stunning views day and",
-        " night."
+        "I turn visual ideas into",
+        "working websites — fast,",
+        "clean and ready to scale",
+        "with your business as it",
+        "grows over time."
     ]
 ];
 
 export const feedbackReviewLG = [
     [
-        "Marcus Simpson",
-        "New York",
+        "UI / UX Design",
+        "Figma · Framer",
         "review1",
         "33%"
     ],
     [
-        "Lena Morrison",
-        "Los Angeles",
+        "Frontend Dev",
+        "React · Vite · CSS",
         "review2",
         "66%"
     ],
     [
-        "Jason Whitaker",
-        "San Francisco",
+        "Web Design",
+        "Responsive · Modern",
         "review3",
         "100%"
     ]

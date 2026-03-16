@@ -34,11 +34,11 @@ const MarqueeSticky = () => {
         <section className=" w-full overflow-hidden">
             <div className="pin-con relative">
                 <div className="pl-8">
-                    <p className="text-[0.7rem] text-[#eae5dd] choose-subtitle">
-                        Want to learn more about
-                        <br />
-                        the benefits of—Capsules<span>®</span>?
-                    </p>
+                   <p className="text-[0.7rem] choose-subtitle" style={{ color: '#cc1100', letterSpacing: '3px' }}>
+    AVAILABLE FOR FREELANCE
+    <br />
+    PROJECTS — LOCAL & INTERNATIONAL
+</p>
                 </div>
 
                 <div className="marquee-con-none absolute top-0 -z-1">

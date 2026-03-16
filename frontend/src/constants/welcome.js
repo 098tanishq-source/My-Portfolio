@@ -1,33 +1,32 @@
-export const welcomeLinesLG = [
-    "Welcome to a world of wild California",
-    "desert with Capsules®, where you will",
-    "discover exquisite nature observing it",
-    "from capsule houses, nestled in the",
-    "one of the most breathtaking",
-    "destination on the United States.",
-];
-export const welcomeLinesSM = [
-    "Welcome to a world",
-    "of wild California",
-    "desert with ",
-    "Capsules®, where ",
-    "you will discover ",
-    "exquisite nature",
-    "observing it from",
-    "capsule houses,",
-    "nestled in the one",
-    "of the most",
-    "breathtaking",
-    "destination on the",
-    "United States.",
+ export const welcomeLinesLG = [
+    "Hi, I'm Tanishq — a Front-End",
+    "Developer and UI focused web",
+    "designer. I create modern,",
+    "responsive and visually engaging",
+    "websites that help brands",
+    "present themselves clearly.",
 ];
 
-export const chooseLinesLG =[
-    "Choose the one",
-    "you like best"
+export const welcomeLinesSM = [
+    "Hi, I'm Tanishq",
+    "— a Front-End",
+    "Developer and UI",
+    "focused web",
+    "designer. I create",
+    "modern, responsive",
+    "and visually",
+    "engaging websites",
+    "that help brands",
+    "present themselves",
+    "clearly online.",
 ];
-export const chooseLinesSM =[
-    "Choose the",
-    "one you like",
-    "best"
+
+export const chooseLinesLG = [
+    "Selected",
+    "Projects"
+];
+
+export const chooseLinesSM = [
+    "Selected",
+    "Projects"
 ];

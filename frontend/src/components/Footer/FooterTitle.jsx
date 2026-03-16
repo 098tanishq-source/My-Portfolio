@@ -72,10 +72,10 @@ const FooterTitle = () => {
         <section ref={ftConRef} className='relative z-1 w-screen h-[40vh] border-1 border-t-[#c4c1b9]'>
             <div className='w-full flex justify-between items-center px-6 mt-8'>
                 <p className='text-[#b1a696] text-[0.7rem]'>
-                    Website made by—<a href="#" className='text-[#f2ede5]'>Moyra.co</a>
+                   Designed & Built by—<a href="#" className='text-[#f2ede5]'>Tanishq</a>
                 </p>
                 <p className='text-[#b1a696] text-[0.7rem]'>
-                    This website is using <a href="#" className='text-[#f2ede5]'>cookies</a>
+                   Available for <a href="#" className='text-[#f2ede5]'>Freelance Work</a>
                 </p>
                 <p className='text-[#b1a696] text-[0.7rem]'>
                     All rights reserved © <a href="#" className='text-[#f2ede5]'>2025</a>
@@ -84,7 +84,7 @@ const FooterTitle = () => {
 
             <div className='footer-title w-full text-center'>
                 <h1 className='text-[18vw] font-bold'>
-                    Capsules<sub>®</sub>
+                    Tanishq<sub>®</sub>
                 </h1>
             </div>
         </section>

@@ -1,24 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './gallery.css';
-import { BsFillPlusCircleFill } from "react-icons/bs";
 
-import gbg1 from '../../assets/background1.png';
-import gbg2 from '../../assets/background2.png';
-import gbg3 from '../../assets/background3.png';
-import gbg4 from '../../assets/background4.png';
+import project1 from '../../assets/project-void.png';
+import project2 from '../../assets/project-lumiere.png';
+import project3 from '../../assets/project-ironforge.png';
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
     const pageRef = useRef(null);
 
     useEffect(() => {
-
-        // document.fonts.ready.then(() => {
-        // Create new timeline
         const tl4 = gsap.timeline({
             scrollTrigger: {
                 trigger: ".gallery-page4",
@@ -29,9 +23,8 @@ const Gallery = () => {
             }
         });
 
-        // Add background color animation
         tl4.to(".gallery-page4", {
-            backgroundColor: "#181717",
+            backgroundColor: "#0a0000",
         }, 'start');
 
         gsap.set(".gallery-topText h4, .gallery-topText h3, .gallery-bottomText h3", {
@@ -39,10 +32,7 @@ const Gallery = () => {
             x: 0
         });
 
-        // Animation sequence
-        tl4.to(".gallery-box h3", {
-            opacity: 0,
-        }, 'a')
+        tl4.to(".gallery-box h3", { opacity: 0 }, 'a')
             .to(".gallery-page4 .gallery-background", {
                 width: "calc(100vw - 1rem)",
                 height: "calc(100vh - 1rem)",
@@ -57,7 +47,6 @@ const Gallery = () => {
                 x: 50,
             })
             .to({}, { duration: 0.4 }, "+=0")
-
             .to("#gallery-second", {
                 transform: "translate(-50%, -56%)",
             }, 'b')
@@ -90,86 +79,118 @@ const Gallery = () => {
             })
             .to({}, { duration: 0.4 }, "+=0");
 
-        // Clean up function
         return () => {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
 
-    // Generate repeating Capsules® elements
-    const generateCapsules = (quantity = 6) => {
-        const capsules = [];
+    const generateTitles = (quantity = 6) => {
+        const items = [];
         for (let i = 1; i <= quantity; i++) {
-            capsules.push(
+            items.push(
                 <h3 key={i} style={{ "--index": i }} className='tracking-tighter'>
-                    Capsules®
+                    Selected Work
                 </h3>
             );
         }
-        return capsules;
+        return items;
     };
 
     return (
         <section className="gallery-page4" ref={pageRef}>
             <div className="gallery-slider">
-                <div
-                    className="gallery-box"
-                    style={{ "--time": "40s", "--quantity": 6 }}
-                >
-                    {generateCapsules(6)}
+                <div className="gallery-box" style={{ "--time": "40s", "--quantity": 6 }}>
+                    {generateTitles(6)}
                 </div>
             </div>
 
+            {/* PROJECT 1 — VOID STREETWEAR */}
             <div className="gallery-background">
-                <img src={gbg1} alt="Classic Capsule" />
+                <img src={project1} alt="Void Streetwear" />
                 <div className="gallery-topText">
-                    <h4>ClassicCapsule®</h4>
+                    <h4>Void Streetwear</h4>
                     <h3>(Scroll)</h3>
                 </div>
                 <div className="gallery-bottomText">
                     <div className='w-full flex justify-center items-center gap-0'>
-                        <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
-                        <h3>Classic Capsule® boasts refined aesthetics and a modern <br /> interior, creating an intimate retreat in a desert landscape</h3>
+                        <span className='text-[#cc1100] text-2xl mr-3'>◈</span>
+                        <h3>
+                            Fashion brand concept — bold typography, high-contrast visuals
+                            and experimental layout rhythm.
+                            <a href="https://098tanishq-source.github.io/void-streetwear/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-4 underline"
+                                style={{ color: '#ff2200' }}>
+                                Visit Site
+                            </a>
+                        </h3>
                     </div>
                     <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 bg-[#f4efe7] w-[33%] h-[0.1rem] top-1/2 -translate-y-1/2 left-0"></div>
+                        <div className="progress-line absolute z-10 h-[0.1rem] top-1/2 -translate-y-1/2 left-0"
+                            style={{ width: '33%', background: '#cc1100' }}></div>
                     </div>
                 </div>
             </div>
 
+            {/* PROJECT 2 — LUMI-RE */}
             <div id="gallery-second" className="gallery-background2">
-                <img src={gbg2} alt="Terrace Capsule" />
+                <img src={project2} alt="Lumi-re Restaurant" />
                 <div className="gallery-topText">
-                    <h4>Terrace Capsule®</h4>
+                    <h4>Lumi-re</h4>
                     <h3>(Scroll)</h3>
                 </div>
                 <div className="gallery-bottomText">
                     <div className='w-full flex justify-center items-center gap-0'>
-                        <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
-                        <h3>Classic Capsule® boasts refined aesthetics and a modern <br /> interior, creating an intimate retreat in a desert landscape</h3>
+                        <span className='text-[#cc1100] text-2xl mr-3'>◈</span>
+                        <h3>
+                            Fine dining concept — dark romantic aesthetics, refined
+                            typography and spacious layout composition.
+                            <a href="https://098tanishq-source.github.io/Lumi-re/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-4 underline"
+                                style={{ color: '#ff2200' }}>
+                                Visit Site
+                            </a>
+                        </h3>
                     </div>
                     <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 bg-[#f4efe7] w-[67%] h-[0.1rem] top-1/2 -translate-y-1/2 left-0"></div>
+                        <div className="progress-line absolute z-10 h-[0.1rem] top-1/2 -translate-y-1/2 left-0"
+                            style={{ width: '67%', background: '#cc1100' }}></div>
                     </div>
                 </div>
             </div>
 
+            {/* PROJECT 3 — IRONFORGE */}
             <div id="gallery-third" className="gallery-background2">
-                <img src={gbg3} alt="Desert Capsule" />
+                <img src={project3} alt="IronForge Gym" />
                 <div className="gallery-topText">
-                    <h4>Desert Capsule®</h4>
+                    <h4>IronForge Gym</h4>
                     <h3>(Scroll)</h3>
                 </div>
                 <div className="gallery-bottomText">
                     <div className='w-full flex justify-center items-center gap-0'>
-                        <BsFillPlusCircleFill className='w-8 h-8 text-[#b1a696]' />
-                        <h3>Classic Capsule® boasts refined aesthetics and a modern <br /> interior, creating an intimate retreat in a desert landscape</h3>
+                        <span className='text-[#cc1100] text-2xl mr-3'>◈</span>
+                        <h3>
+                            Fitness website — high-energy design communicating strength,
+                            motivation and clarity with bold headings.
+                            <a href="https://098tanishq-source.github.io/ironforge-gym/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="ml-4 underline"
+                                style={{ color: '#ff2200' }}>
+                                Visit Site
+                            </a>
+                        </h3>
                     </div>
                     <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 bg-[#f4efe7] w-[100%] h-[0.1rem] top-1/2 -translate-y-1/2 left-0"></div>
+                        <div className="progress-line absolute z-10 h-[0.1rem] top-1/2 -translate-y-1/2 left-0"
+                            style={{ width: '100%', background: '#cc1100' }}></div>
                     </div>
                 </div>
             </div>
+
         </section>
     );
 };

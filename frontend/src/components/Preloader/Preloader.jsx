@@ -143,7 +143,7 @@ const Preloader = () => {
             <div className="preloader-progress">
                 <div className="preloader-progress-bar"></div>
                 <div className="preloader-logo">
-                    <h1 ref={preloaderLogoRef} className="logo-text">Capsule</h1>
+                    <h1 ref={preloaderLogoRef} className="logo-text">tanishq</h1>
                 </div>
             </div>
 
@@ -152,8 +152,7 @@ const Preloader = () => {
             <div className="preloader-content">
                 <div className="preloader-footer">
                     <p>
-                        Spaces unfold in light and shadow, where structure finds its quiet
-                        rhythm, and time aligns harmony.
+                        Designing clean, modern and responsive websites — one pixel at a time..
                     </p>
                 </div>
             </div>

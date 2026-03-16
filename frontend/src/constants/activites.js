@@ -1,4 +1,4 @@
-export const activitiesLinesLG = [
-    "Discover the",
-    "desert activities"
+ export const activitiesLinesLG = [
+    "My Skills &",
+    "Expertise"
 ]
