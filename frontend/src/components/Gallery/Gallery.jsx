@@ -23,14 +23,7 @@ const Gallery = () => {
             }
         });
 
-        tl4.to(".gallery-page4", {
-            backgroundColor: "#0a0000",
-        }, 'start');
-
-        gsap.set(".gallery-topText h4, .gallery-topText h3, .gallery-bottomText h3", {
-            opacity: 1,
-            x: 0
-        });
+        tl4.to(".gallery-page4", { backgroundColor: "#0a0000" }, 'start');
 
         tl4.to(".gallery-box h3", { opacity: 0 }, 'a')
             .to(".gallery-page4 .gallery-background", {
@@ -39,44 +32,18 @@ const Gallery = () => {
                 borderRadius: "3.5rem",
                 y: -40,
             }, 'a')
-            .to(".gallery-page4 .gallery-background img", {
-                transform: "scale(1)",
-            }, 'a')
-            .from(".gallery-background .gallery-topText h4, .gallery-background .gallery-topText h3, .gallery-background .gallery-bottomText h3", {
-                opacity: 0,
-                x: 50,
-            })
+            .to(".gallery-page4 .gallery-background img", { transform: "scale(1)" }, 'a')
+            .from(".gallery-background .gallery-bottomText h3", { opacity: 0, x: 50 })
             .to({}, { duration: 0.4 }, "+=0")
-            .to("#gallery-second", {
-                transform: "translate(-50%, -56%)",
-            }, 'b')
-            .to("#gallery-second img", {
-                transform: "scale(1)",
-            }, 'b')
-            .to(".gallery-page4 .gallery-background", {
-                scale: 0.9,
-                opacity: 0,
-                y: -50
-            }, 'b')
-            .from("#gallery-second .gallery-topText h4, #gallery-second .gallery-topText h3, #gallery-second .gallery-bottomText h3", {
-                opacity: 0,
-                x: 50,
-            })
+            .to("#gallery-second", { transform: "translate(-50%, -56%)" }, 'b')
+            .to("#gallery-second img", { transform: "scale(1)" }, 'b')
+            .to(".gallery-page4 .gallery-background", { scale: 0.9, opacity: 0, y: -50 }, 'b')
+            .from("#gallery-second .gallery-bottomText h3", { opacity: 0, x: 50 })
             .to({}, { duration: 0.4 }, "+=0")
-            .to("#gallery-third", {
-                transform: "translate(-50%, -56%)",
-            }, 'c')
-            .to("#gallery-third img", {
-                transform: "scale(1)",
-            }, 'c')
-            .to("#gallery-second", {
-                scale: 0.9,
-                opacity: 0,
-            }, 'c')
-            .from("#gallery-third .gallery-topText h4, #gallery-third .gallery-topText h3, #gallery-third .gallery-bottomText h3", {
-                opacity: 0,
-                x: 50,
-            })
+            .to("#gallery-third", { transform: "translate(-50%, -56%)" }, 'c')
+            .to("#gallery-third img", { transform: "scale(1)" }, 'c')
+            .to("#gallery-second", { scale: 0.9, opacity: 0 }, 'c')
+            .from("#gallery-third .gallery-bottomText h3", { opacity: 0, x: 50 })
             .to({}, { duration: 0.4 }, "+=0");
 
         return () => {
@@ -89,12 +56,31 @@ const Gallery = () => {
         for (let i = 1; i <= quantity; i++) {
             items.push(
                 <h3 key={i} style={{ "--index": i }} className='tracking-tighter'>
-                    Selected Work
+                    My Work
                 </h3>
             );
         }
         return items;
     };
+
+    const ProgressBar = ({ percent }) => (
+        <div style={{
+            position: 'absolute',
+            top: '60px',
+            right: '28px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            zIndex: 20,
+        }}>
+            <span style={{ color: 'rgba(240,236,228,0.3)', fontSize: '0.6rem', letterSpacing: '2px' }}>
+                {percent === 33 ? '01' : percent === 67 ? '02' : '03'} / 03
+            </span>
+            <div style={{ width: '80px', height: '1px', background: 'rgba(240,236,228,0.15)', position: 'relative' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: `${percent}%`, background: '#cc1100' }} />
+            </div>
+        </div>
+    );
 
     return (
         <section className="gallery-page4" ref={pageRef}>
@@ -104,90 +90,57 @@ const Gallery = () => {
                 </div>
             </div>
 
-            {/* PROJECT 1 — VOID STREETWEAR */}
+            {/* PROJECT 1 */}
             <div className="gallery-background">
                 <img src={project1} alt="Void Streetwear" />
-                <div className="gallery-topText">
-                    <h4>Void Streetwear</h4>
-                    <h3>(Scroll)</h3>
-                </div>
-                <div className="gallery-bottomText">
-                    <div className='w-full flex justify-center items-center gap-0'>
-                        <span className='text-[#cc1100] text-2xl mr-3'>◈</span>
-                        <h3>
-                            Fashion brand concept — bold typography, high-contrast visuals
-                            and experimental layout rhythm.
-                            <a href="https://098tanishq-source.github.io/void-streetwear/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="ml-4 underline"
-                                style={{ color: '#ff2200' }}>
-                                Visit Site
-                            </a>
-                        </h3>
-                    </div>
-                    <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 h-[0.1rem] top-1/2 -translate-y-1/2 left-0"
-                            style={{ width: '33%', background: '#cc1100' }}></div>
-                    </div>
+                <ProgressBar percent={33} />
+                <div className="gallery-bottomText" style={{ justifyContent: 'center' }}>
+                    <a href="https://098tanishq-source.github.io/void-streetwear/"
+                        target="_blank" rel="noopener noreferrer"
+                        style={{
+                            color: '#f0ece4', fontSize: '0.75rem', letterSpacing: '3px',
+                            textDecoration: 'none', border: '1px solid rgba(240,236,228,0.3)',
+                            padding: '8px 24px', borderRadius: '999px',
+                            background: 'rgba(240,236,228,0.05)', backdropFilter: 'blur(10px)',
+                        }}>
+                        VISIT ↗
+                    </a>
                 </div>
             </div>
 
-            {/* PROJECT 2 — LUMI-RE */}
+            {/* PROJECT 2 */}
             <div id="gallery-second" className="gallery-background2">
                 <img src={project2} alt="Lumi-re Restaurant" />
-                <div className="gallery-topText">
-                    <h4>Lumi-re</h4>
-                    <h3>(Scroll)</h3>
-                </div>
-                <div className="gallery-bottomText">
-                    <div className='w-full flex justify-center items-center gap-0'>
-                        <span className='text-[#cc1100] text-2xl mr-3'>◈</span>
-                        <h3>
-                            Fine dining concept — dark romantic aesthetics, refined
-                            typography and spacious layout composition.
-                            <a href="https://098tanishq-source.github.io/Lumi-re/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="ml-4 underline"
-                                style={{ color: '#ff2200' }}>
-                                Visit Site
-                            </a>
-                        </h3>
-                    </div>
-                    <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 h-[0.1rem] top-1/2 -translate-y-1/2 left-0"
-                            style={{ width: '67%', background: '#cc1100' }}></div>
-                    </div>
+                <ProgressBar percent={67} />
+                <div className="gallery-bottomText" style={{ justifyContent: 'center' }}>
+                    <a href="https://098tanishq-source.github.io/Lumi-re/"
+                        target="_blank" rel="noopener noreferrer"
+                        style={{
+                            color: '#f0ece4', fontSize: '0.75rem', letterSpacing: '3px',
+                            textDecoration: 'none', border: '1px solid rgba(240,236,228,0.3)',
+                            padding: '8px 24px', borderRadius: '999px',
+                            background: 'rgba(240,236,228,0.05)', backdropFilter: 'blur(10px)',
+                        }}>
+                        VISIT ↗
+                    </a>
                 </div>
             </div>
 
-            {/* PROJECT 3 — IRONFORGE */}
+            {/* PROJECT 3 */}
             <div id="gallery-third" className="gallery-background2">
                 <img src={project3} alt="IronForge Gym" />
-                <div className="gallery-topText">
-                    <h4>IronForge Gym</h4>
-                    <h3>(Scroll)</h3>
-                </div>
-                <div className="gallery-bottomText">
-                    <div className='w-full flex justify-center items-center gap-0'>
-                        <span className='text-[#cc1100] text-2xl mr-3'>◈</span>
-                        <h3>
-                            Fitness website — high-energy design communicating strength,
-                            motivation and clarity with bold headings.
-                            <a href="https://098tanishq-source.github.io/ironforge-gym/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="ml-4 underline"
-                                style={{ color: '#ff2200' }}>
-                                Visit Site
-                            </a>
-                        </h3>
-                    </div>
-                    <div className="relative z-9 w-50 h-[0.1rem] bg-[#4f4b48]">
-                        <div className="progress-line absolute z-10 h-[0.1rem] top-1/2 -translate-y-1/2 left-0"
-                            style={{ width: '100%', background: '#cc1100' }}></div>
-                    </div>
+                <ProgressBar percent={100} />
+                <div className="gallery-bottomText" style={{ justifyContent: 'center' }}>
+                    <a href="https://098tanishq-source.github.io/ironforge-gym/"
+                        target="_blank" rel="noopener noreferrer"
+                        style={{
+                            color: '#f0ece4', fontSize: '0.75rem', letterSpacing: '3px',
+                            textDecoration: 'none', border: '1px solid rgba(240,236,228,0.3)',
+                            padding: '8px 24px', borderRadius: '999px',
+                            background: 'rgba(240,236,228,0.05)', backdropFilter: 'blur(10px)',
+                        }}>
+                        VISIT ↗
+                    </a>
                 </div>
             </div>
 
@@ -195,4 +148,4 @@ const Gallery = () => {
     );
 };
 
-export default Gallery;
+export default Gallery; 

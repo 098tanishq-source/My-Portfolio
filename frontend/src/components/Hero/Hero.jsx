@@ -1,4 +1,4 @@
- import gsap from "gsap";
+  import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useMediaQuery } from "react-responsive";
 import heroBg from "../../assets/hero-bg.mp4";

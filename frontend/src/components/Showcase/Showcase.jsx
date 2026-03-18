@@ -16,7 +16,7 @@ const projects = [
         num: "01",
         title: "Void Streetwear",
         category: "Fashion · UI Design",
-        desc: "A modern streetwear website concept with bold typography and experimental layout rhythm.",
+        desc: "Fashion brand concept with bold typography and experimental layout.",
         stack: "HTML · CSS · JS",
         link: "https://098tanishq-source.github.io/void-streetwear/",
     },
@@ -25,7 +25,7 @@ const projects = [
         num: "02",
         title: "Lumi-re Restaurant",
         category: "Fine Dining · Web Design",
-        desc: "An elegant restaurant concept built around dark romantic aesthetics and refined typography.",
+        desc: "Fine dining concept with dark romantic aesthetics and refined typography.",
         stack: "HTML · CSS · JS",
         link: "https://098tanishq-source.github.io/Lumi-re/",
     },
@@ -34,7 +34,7 @@ const projects = [
         num: "03",
         title: "IronForge Gym",
         category: "Fitness · Frontend Dev",
-        desc: "A high-energy gym website designed to communicate strength, motivation and clarity.",
+        desc: "High-energy gym website communicating strength and motivation.",
         stack: "HTML · CSS · JS",
         link: "https://098tanishq-source.github.io/ironforge-gym/",
     },
@@ -62,37 +62,37 @@ const Showcase = () => {
 
     return (
         <section ref={containerRef} className="relative w-full h-dvh overflow-hidden" style={{ background: '#080808' }}>
-            <div ref={imgConRef} className="absolute top-0 left-0 h-full flex items-center justify-start gap-2 p-2">
-                {projects.map((project, index) => (
-                    <div key={index} className="relative flex-shrink-0 w-[95vw] h-full overflow-hidden">
 
-                         <div className="w-[90vw] absolute top-10 left-5 flex justify-between items-start text-[#f4efe7] z-10">
+            <div ref={imgConRef} className="absolute top-0 left-0 h-full flex items-center gap-4 px-4">
+                {projects.map((project, index) => (
+                    <div key={index} className="relative flex-shrink-0 overflow-hidden" style={{ width: '92vw', height: '88vh', borderRadius: '2rem' }}>
+
+                        <img src={project.img} alt={project.title} className="w-full h-full object-cover object-top" style={{ borderRadius: '2rem' }} />
+
+                        <div className="absolute inset-0" style={{ borderRadius: '2rem', background: 'linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.88) 100%)' }} />
+
+                        <div className="absolute top-7 left-7 right-7 flex justify-between items-start" style={{ zIndex: 10 }}>
                             <div>
-                                <p className="text-xs tracking-widest opacity-60 mb-1">{project.category}</p>
-                                <h1 className="text-3xl font-bold">{project.title}</h1>
+                                <p className="text-[0.65rem] tracking-widest mb-1" style={{ color: 'rgba(240,236,228,0.5)' }}>{project.category}</p>
+                                <h2 className="text-[2.2rem] font-bold leading-none" style={{ color: '#f0ece4' }}>{project.title}</h2>
                             </div>
-                            <p className="border-[1px] rounded-3xl px-3 py-1 text-center text-[0.7rem] opacity-70">{project.stack}</p>
+                            <span className="text-[0.65rem] tracking-widest px-3 py-1 rounded-full" style={{ border: '1px solid rgba(240,236,228,0.2)', color: 'rgba(240,236,228,0.5)' }}>{project.stack}</span>
                         </div>
 
-                        <img src={project.img} alt={project.title} className="image-item w-full h-full object-cover object-top rounded-[2.5rem]" />
-
-                        <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-t from-black/80 via-black/20 to-black/40" />
-
-                        <div className="w-[90vw] absolute bottom-10 left-5 flex justify-between items-end z-10">
-                            <div className="max-w-[60%]">
-                                <p className="text-[0.75rem] text-[#f4efe7] opacity-70 leading-relaxed">{project.desc}</p>
-                                <p className="text-[0.65rem] text-[#f4efe7] opacity-40 mt-1">Static front-end concept — extendable with CMS</p>
+                        <div className="absolute bottom-7 left-7 right-7 flex justify-between items-end" style={{ zIndex: 10 }}>
+                            <div style={{ maxWidth: '60%' }}>
+                                <p className="text-[0.85rem] leading-relaxed" style={{ color: 'rgba(240,236,228,0.55)' }}>{project.desc}</p>
+                                <p className="text-[0.65rem] mt-1" style={{ color: 'rgba(240,236,228,0.25)', letterSpacing: '1px' }}>Static front-end concept</p>
                             </div>
-                            <div className="flex flex-col items-end gap-2">
-                                <div className="flex items-center gap-1">
-                                    <p className="text-[#f4efe7] border-[1px] rounded-3xl px-[1vw] py-1 text-center text-[0.7rem]">{project.num}</p>
-                                    <p className="text-[#4e484e] border-[1px] rounded-3xl px-[1vw] py-1 text-center text-[0.7rem]">03</p>
-                                </div>
-                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-[0.7rem] text-[#f4efe7] border-[1px] border-[#f4efe7] rounded-3xl px-4 py-1.5 hover:bg-[#f4efe7] hover:text-black transition-all duration-300 tracking-wider">
-                                    VISIT SITE
+                            <div className="flex flex-col items-end gap-3">
+                                <span className="text-[0.65rem] px-3 py-1 rounded-full" style={{ color: 'rgba(240,236,228,0.4)', border: '1px solid rgba(240,236,228,0.15)' }}>{project.num} / 03</span>
+                                <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-[0.7rem] tracking-widest px-5 py-2 rounded-full transition-all duration-300 hover:bg-red-700" style={{ color: '#f0ece4', border: '1px solid rgba(240,236,228,0.3)', textDecoration: 'none' }}>
+                                    VISIT SITE ↗
                                 </a>
                             </div>
                         </div>
+
+                        <div className="absolute bottom-0 left-7 right-7 h-px" style={{ background: 'linear-gradient(90deg, #cc1100, transparent)' }} />
 
                     </div>
                 ))}

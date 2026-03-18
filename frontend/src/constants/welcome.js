@@ -22,11 +22,11 @@ export const welcomeLinesSM = [
 ];
 
 export const chooseLinesLG = [
-    "Selected",
-    "Projects"
+    "My Skills &",
+    "Expertise"
 ];
 
 export const chooseLinesSM = [
-    "Selected",
-    "Projects"
+    "My Skills",
+    "& Expertise"
 ];

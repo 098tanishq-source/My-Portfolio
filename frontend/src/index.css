@@ -177,3 +177,59 @@ html, body {
 	display: block;
 	will-change: transform;
 }
+.choose-title-break {
+    position: relative;
+    display: block;
+    color: rgba(240, 236, 228, 0.1);
+}
+.choose-title-clip {
+    position: absolute;
+    top: 0; left: 0;
+    color: #f0ece4;
+    clip-path: inset(0% 100% 0% 0%);
+    white-space: nowrap;
+}
+@keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+/* ===== GLOBAL VIEWPORT FIX ===== */
+
+/* Scale down everything on short screens */
+@media (max-height: 700px) {
+    h1 {
+        font-size: clamp(1.6rem, 4vw, 3rem) !important;
+        letter-spacing: -1px !important;
+        margin-bottom: 10px !important;
+    }
+    p {
+        font-size: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    nav {
+        height: 50px !important;
+    }
+}
+
+@media (max-height: 600px) {
+    h1 {
+        font-size: clamp(1.2rem, 3vw, 2rem) !important;
+    }
+    nav {
+        height: 44px !important;
+    }
+}
+
+/* Prevent any section from overflowing its 100vh box */
+.faq-panel > div {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+/* Safe padding scale */
+@media (max-height: 750px) {
+    .faq-panel > div > div[style*="padding"] {
+        padding-bottom: 16px !important;
+        padding-top: 16px !important;
+    }
+}
