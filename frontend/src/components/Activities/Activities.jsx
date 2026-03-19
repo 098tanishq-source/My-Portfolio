@@ -1,147 +1,273 @@
- import { useGSAP } from "@gsap/react";
-import gsap, { SplitText } from "gsap/all";
-import { useMediaQuery } from "react-responsive";
-import { activitiesLinesLG } from "../../constants/activites";
-import { chooseLinesSM as activitiesLinesSM } from "../../constants/welcome";
-import './activities.css';
+import { useEffect, useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import bgVid from "../../assets/beam-art.mp4";
 
-const skills = [
-    { name: "HTML & CSS", level: "95%", label: "Expert" },
-    { name: "JavaScript", level: "85%", label: "Advanced" },
-    { name: "React", level: "78%", label: "Proficient" },
-    { name: "Figma & UI Design", level: "88%", label: "Advanced" },
-    { name: "GSAP & Animations", level: "72%", label: "Proficient" },
-    { name: "Git & GitHub", level: "80%", label: "Advanced" },
-]
+gsap.registerPlugin(ScrollTrigger);
 
 const Activities = () => {
-    const isMobD = useMediaQuery({ query: "(max-width:768px)" });
-    const activitiesLines = isMobD ? activitiesLinesSM : activitiesLinesLG;
+    const sectionRef = useRef(null);
+    const canvasRef = useRef(null);
+
+    // Noise/grain canvas overlay
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        let aid;
+
+        const drawGrain = () => {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+            const imageData = ctx.createImageData(canvas.width, canvas.height);
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const val = Math.random() * 30;
+                imageData.data[i] = val;
+                imageData.data[i+1] = val;
+                imageData.data[i+2] = val;
+                imageData.data[i+3] = 18;
+            }
+            ctx.putImageData(imageData, 0, 0);
+            aid = requestAnimationFrame(drawGrain);
+        };
+        drawGrain();
+        return () => cancelAnimationFrame(aid);
+    }, []);
 
     useGSAP(() => {
-        const lines = gsap.utils.toArray(".activities-title-clip");
-        const progressLines = gsap.utils.toArray(".skill-bar-fill");
-
-        const activitiesTl = gsap.timeline({
+        const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: ".activities-section",
+                trigger: sectionRef.current,
                 start: "top 80%",
-                end: "top 20%",
-                scrub: true,
-            },
+            }
         });
 
-        activitiesTl.from(".activities-subtitle", {
-            yPercent: 100,
-            opacity: 0,
-            ease: "power1.inOut"
-        });
-
-        if (!isMobD) {
-            activitiesTl.fromTo(
-                ".activities-part",
-                { height: "10vh" },
-                { height: "50vh", ease: "none" }
-            );
-        }
-
-        activitiesTl.to(lines, {
-            clipPath: "inset(0% 0% 0% 0%)",
-            ease: "none",
-            stagger: 0.2,
-            duration: 1,
-        }, "<");
-
-        if (!isMobD) {
-            activitiesTl.from(".activities-sec", {
-                yPercent: 100,
-                duration: 1,
-            }, "<");
-        }
-
-        // Animate skill bars
-        progressLines.forEach((bar, i) => {
-            activitiesTl.fromTo(bar,
-                { width: "0%" },
-                { width: bar.dataset.level, duration: 0.6, ease: "power2.out" },
-                i === 0 ? ">" : "<"
-            );
-        });
-    });
+        // Cinematic reveal sequence
+        tl.fromTo(".act-eyebrow", 
+            { opacity: 0, letterSpacing: "20px" },
+            { opacity: 1, letterSpacing: "6px", duration: 1.2, ease: "power3.out" }
+        )
+        .fromTo(".act-word-1",
+            { opacity: 0, y: 120, rotateX: -90, transformOrigin: "bottom center" },
+            { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: "power4.out" },
+            "-=0.6"
+        )
+        .fromTo(".act-word-2",
+            { opacity: 0, y: 120, rotateX: -90, transformOrigin: "bottom center" },
+            { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: "power4.out" },
+            "-=0.7"
+        )
+        .fromTo(".act-word-3",
+            { opacity: 0, y: 120, rotateX: -90, transformOrigin: "bottom center" },
+            { opacity: 1, y: 0, rotateX: 0, duration: 1, ease: "power4.out" },
+            "-=0.7"
+        )
+        .fromTo(".act-divider",
+            { scaleX: 0, transformOrigin: "left" },
+            { scaleX: 1, duration: 1, ease: "power3.inOut" },
+            "-=0.4"
+        )
+        .fromTo(".act-answer",
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.9, ease: "power2.out" },
+            "-=0.4"
+        )
+        .fromTo(".act-stat",
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" },
+            "-=0.3"
+        )
+        .fromTo(".act-cta",
+            { opacity: 0, y: 16 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+            "-=0.2"
+        );
+    }, { scope: sectionRef });
 
     return (
-        <section className="activities-section w-full h-[120vh] p-8 mt-16"
-            style={{ background: '#0a0000' }}>
-            <p className='text-[.7rem] font-bold activities-subtitle'
-                style={{ color: '#cc1100', letterSpacing: '3px' }}>
-                MY SKILLS & EXPERTISE
-            </p>
-            <div className="lg:mt-10 mt-7 activities-part origin-bottom">
-                {activitiesLines.map((line, index) => (
-                    <h1 key={index}
-                        className="activities-heading lg:text-[9.5rem] text-[3rem] leading-[0.9] font-medium tracking-tighter"
-                        style={{ color: '#f0ece4' }}>
-                        <span className={`activities-title-break ${index == 1 ? "lg:pb-3 pb-2" : ""}`}>
-                            {line}
-                            <span className={`activities-title-clip ${index == 1 ? "lg:pb-3 pb-2" : ""}`}>
-                                {line}
-                            </span>
-                        </span>
-                    </h1>
-                ))}
-            </div>
+        <section ref={sectionRef} style={{
+            position: "relative",
+            width: "100%",
+            height: "100vh",
+            background: "#03030a",
+            overflow: "hidden",
+            display: "flex",
+            alignItems: "center",
+            perspective: "1000px",
+        }}>
+            <style>{`
+                @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+                .act-display {
+                    font-family: 'Bebas Neue', 'Syne', sans-serif;
+                    line-height: 0.88;
+                    letter-spacing: 4px;
+                }
+            `}</style>
 
-            <div className="activities-sec w-full flex lg:flex-row flex-col justify-center items-start gap-10 lg:mt-0">
-                {/* LEFT — Skill bars */}
-                <div className="lg:w-1/2 w-full">
-                    <p className="text-[.7rem] mb-8" style={{ color: 'rgba(240,236,228,0.4)', letterSpacing: '2px' }}>
-                        PROFICIENCY LEVELS
-                    </p>
-                    <div className="flex flex-col gap-6 mr-14">
-                        {skills.map((skill, i) => (
-                            <div key={i} className="w-full">
-                                <div className="flex justify-between w-full mb-2">
-                                    <h1 className="text-xl" style={{ color: '#f0ece4' }}>{skill.name}</h1>
-                                    <p className="text-[0.7rem]" style={{ color: '#cc1100' }}>{skill.label}</p>
-                                </div>
-                                <div className="relative w-full h-[1px]" style={{ background: 'rgba(255,255,255,0.08)' }}>
-                                    <div
-                                        className="skill-bar-fill absolute h-full top-0 left-0"
-                                        data-level={skill.level}
-                                        style={{ background: '#cc1100', width: '0%', boxShadow: '0 0 8px rgba(204,17,0,0.5)' }}
-                                    />
-                                </div>
+            {/* Video BG */}
+            <video autoPlay muted loop playsInline style={{
+                position: "absolute", inset: 0,
+                width: "100%", height: "100%",
+                objectFit: "cover",
+                opacity: 0.25,
+                zIndex: 0,
+            }}>
+                <source src={bgVid} type="video/mp4" />
+            </video>
+
+            {/* Dark overlay gradient */}
+            <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(135deg, rgba(3,3,10,0.92) 40%, rgba(10,0,0,0.7) 100%)",
+                zIndex: 1,
+            }} />
+
+            {/* Grain canvas */}
+            <canvas ref={canvasRef} style={{
+                position: "absolute", inset: 0,
+                width: "100%", height: "100%",
+                pointerEvents: "none",
+                zIndex: 2,
+                opacity: 0.6,
+            }} />
+
+            {/* Red accent line — left edge */}
+            <div style={{
+                position: "absolute",
+                left: 0, top: "15%", bottom: "15%",
+                width: "3px",
+                background: "linear-gradient(to bottom, transparent, #cc1100, transparent)",
+                zIndex: 3,
+            }} />
+
+            {/* Content */}
+            <div style={{
+                position: "relative",
+                zIndex: 4,
+                padding: "0 clamp(32px, 6vw, 100px)",
+                width: "100%",
+            }}>
+                {/* Eyebrow */}
+                <p className="act-eyebrow" style={{
+                    color: "#cc1100",
+                    fontSize: "0.6rem",
+                    letterSpacing: "6px",
+                    fontWeight: "600",
+                    marginBottom: "clamp(16px, 3vh, 32px)",
+                    opacity: 0,
+                }}>WHY HIRE ME</p>
+
+                {/* 3D word reveal */}
+                <div style={{ overflow: "hidden", marginBottom: "0.05em" }}>
+                    <div className="act-display act-word-1" style={{
+                        fontSize: "clamp(4rem, 12vh, 11rem)",
+                        color: "#f0ece4",
+                        opacity: 0,
+                    }}>WHY</div>
+                </div>
+                <div style={{ overflow: "hidden", marginBottom: "0.05em" }}>
+                    <div className="act-display act-word-2" style={{
+                        fontSize: "clamp(4rem, 12vh, 11rem)",
+                        color: "#f0ece4",
+                        opacity: 0,
+                    }}>HIRE</div>
+                </div>
+                <div style={{ overflow: "hidden", marginBottom: "clamp(20px, 4vh, 40px)" }}>
+                    <div className="act-display act-word-3" style={{
+                        fontSize: "clamp(4rem, 12vh, 11rem)",
+                        color: "transparent",
+                        WebkitTextStroke: "2px #cc1100",
+                        opacity: 0,
+                    }}>ME?</div>
+                </div>
+
+                {/* Divider */}
+                <div className="act-divider" style={{
+                    width: "clamp(200px, 30vw, 500px)",
+                    height: "1px",
+                    background: "linear-gradient(90deg, #cc1100, transparent)",
+                    marginBottom: "clamp(16px, 3vh, 28px)",
+                    opacity: 1,
+                }} />
+
+                {/* Answer */}
+                <p className="act-answer" style={{
+                    fontSize: "clamp(0.9rem, 1.5vw, 1.2rem)",
+                    color: "rgba(240,236,228,0.5)",
+                    lineHeight: 1.7,
+                    maxWidth: "460px",
+                    marginBottom: "clamp(20px, 4vh, 36px)",
+                    opacity: 0,
+                }}>
+                    Because I build sites that look premium<br />
+                    <em style={{ color: "rgba(240,236,228,0.85)", fontStyle: "normal", fontWeight: 600 }}>
+                        and actually get you clients.
+                    </em>
+                </p>
+
+                {/* Stats */}
+                <div style={{
+                    display: "flex",
+                    gap: "clamp(24px, 4vw, 56px)",
+                    marginBottom: "clamp(24px, 4vh, 40px)",
+                    flexWrap: "wrap",
+                }}>
+                    {[
+                        { num: "5", unit: "Days", label: "Avg. delivery" },
+                        { num: "₹2K–8K", unit: "", label: "Per project" },
+                        { num: "3+", unit: "Sites", label: "Live & running" },
+                        { num: "16", unit: "yo", label: "Self-taught" },
+                    ].map((s, i) => (
+                        <div key={i} className="act-stat" style={{ opacity: 0 }}>
+                            <div style={{
+                                fontSize: "clamp(1.4rem, 2.5vh, 2rem)",
+                                fontWeight: "800",
+                                color: "#f0ece4",
+                                lineHeight: 1,
+                                fontFamily: "'Bebas Neue', sans-serif",
+                                letterSpacing: "1px",
+                            }}>
+                                {s.num}<span style={{ color: "#cc1100" }}>{s.unit && ` ${s.unit}`}</span>
                             </div>
-                        ))}
-                    </div>
+                            <div style={{
+                                fontSize: "0.55rem",
+                                letterSpacing: "2px",
+                                color: "rgba(240,236,228,0.25)",
+                                marginTop: "4px",
+                            }}>{s.label}</div>
+                        </div>
+                    ))}
                 </div>
 
-                {/* RIGHT — About */}
-                <div className="lg:w-1/2 w-full lg:text-[1.6rem] text-[1rem] md:leading-[1.2] lg:mt-0 mt-8"
-                    style={{ color: 'rgba(240,236,228,0.45)' }}>
-                    <p>
-                        I am a self-taught frontend developer from
-                        India, focused on building clean, fast and
-                        visually engaging websites. I combine strong
-                        design sense with modern code to deliver
-                        experiences that look great and work perfectly
-                        across all devices.
-                    </p>
-                    <div className="mt-8 flex gap-4 flex-wrap">
-                        <div className="px-4 py-2 text-[0.7rem] tracking-[2px]"
-                            style={{ border: '1px solid rgba(204,17,0,0.3)', color: '#cc1100' }}>
-                            INDIA BASED
-                        </div>
-                        <div className="px-4 py-2 text-[0.7rem] tracking-[2px]"
-                            style={{ border: '1px solid rgba(240,236,228,0.15)', color: 'rgba(240,236,228,0.5)' }}>
-                            AVAILABLE NOW
-                        </div>
-                        <div className="px-4 py-2 text-[0.7rem] tracking-[2px]"
-                            style={{ border: '1px solid rgba(240,236,228,0.15)', color: 'rgba(240,236,228,0.5)' }}>
-                            REMOTE FRIENDLY
-                        </div>
-                    </div>
-                </div>
+                {/* CTA */}
+                <a href="https://ig.me/m/_friendly_dev"
+                    target="_blank" rel="noopener noreferrer"
+                    className="act-cta"
+                    style={{
+                        display: "inline-flex", alignItems: "center", gap: "12px",
+                        padding: "13px 30px",
+                        background: "transparent",
+                        color: "#f0ece4",
+                        fontSize: "0.65rem",
+                        fontWeight: "700",
+                        letterSpacing: "3px",
+                        textDecoration: "none",
+                        border: "1px solid rgba(240,236,228,0.2)",
+                        transition: "all 0.25s ease",
+                        opacity: 0,
+                    }}
+                    onMouseEnter={e => {
+                        e.currentTarget.style.background = "#cc1100";
+                        e.currentTarget.style.borderColor = "#cc1100";
+                    }}
+                    onMouseLeave={e => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.borderColor = "rgba(240,236,228,0.2)";
+                    }}
+                >
+                    START A PROJECT ↗
+                </a>
             </div>
         </section>
     );

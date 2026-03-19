@@ -1,4 +1,4 @@
- import { useGSAP } from "@gsap/react";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap/all";
 import { useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
@@ -108,7 +108,7 @@ const Choose = () => {
             }
         })
         .from(".choose-subtitle", { yPercent: 100, opacity: 0 })
-        .fromTo(".title-part", { height: "8vh" }, { height: "28vh", ease: "none" }, "<")
+        .fromTo(".title-part", { height: "8vh" }, { height: "48vh", ease: "none" }, "<")
         .to(lines, { clipPath: "inset(0% 0% 0% 0%)", stagger: 0.25, ease: "none", duration: 1 }, "<");
 
         const shardEls = gsap.utils.toArray(".choose-shard");
@@ -124,7 +124,7 @@ const Choose = () => {
             scrollTrigger: {
                 trigger: ".choose-pin-zone",
                 start:   "top top",
-                end:     "+=600%",
+                end:     "+=400%",
                 scrub:   1.2,
                 pin:     true,
                 pinSpacing: true,
@@ -173,13 +173,13 @@ const Choose = () => {
         <section
             ref={sectionRef}
             className="choose-section w-full"
-            style={{ background: '#0a0000', minHeight: '800vh', position: 'relative' }}
+            style={{ background: '#0a0000', position: 'relative' }}
         >
             {/* heading zone */}
             <div className="choose-heading-zone p-8 pt-12">
                 <p className="choose-subtitle text-[.7rem] overflow-hidden"
                     style={{ color: '#cc1100', letterSpacing: '3px' }}>
-                    MY SKILLS 
+                    MY SKILLS & EXPERTISE
                 </p>
                 <div className="title-part origin-bottom mt-6">
                     {chooseLines.map((line, i) => (

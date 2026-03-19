@@ -1,4 +1,4 @@
- import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './gallery.css';
@@ -20,8 +20,13 @@ const Gallery = () => {
                 end: "220% 30%",
                 scrub: 1,
                 pin: true,
+                pinSpacing: true,
             }
         });
+
+        // Set initial states via GSAP so it owns the transform — no CSS conflict
+        gsap.set("#gallery-second", { xPercent: -50, yPercent: 100 });
+        gsap.set("#gallery-third",  { xPercent: -50, yPercent: 100 });
 
         tl4.to(".gallery-page4", { backgroundColor: "#0a0000" }, 'start');
 
@@ -32,18 +37,15 @@ const Gallery = () => {
                 borderRadius: "3.5rem",
                 y: -40,
             }, 'a')
-            .to(".gallery-page4 .gallery-background img", { transform: "scale(1)" }, 'a')
-            .from(".gallery-background .gallery-bottomText h3", { opacity: 0, x: 50 })
+            .to(".gallery-page4 .gallery-background img", { scale: 1 }, 'a')
             .to({}, { duration: 0.4 }, "+=0")
-            .to("#gallery-second", { transform: "translate(-50%, -56%)" }, 'b')
-            .to("#gallery-second img", { transform: "scale(1)" }, 'b')
+            .to("#gallery-second", { xPercent: -50, yPercent: -56 }, 'b')
+            .to("#gallery-second img", { scale: 1 }, 'b')
             .to(".gallery-page4 .gallery-background", { scale: 0.9, opacity: 0, y: -50 }, 'b')
-            .from("#gallery-second .gallery-bottomText h3", { opacity: 0, x: 50 })
             .to({}, { duration: 0.4 }, "+=0")
-            .to("#gallery-third", { transform: "translate(-50%, -56%)" }, 'c')
-            .to("#gallery-third img", { transform: "scale(1)" }, 'c')
+            .to("#gallery-third", { xPercent: -50, yPercent: -56 }, 'c')
+            .to("#gallery-third img", { scale: 1 }, 'c')
             .to("#gallery-second", { scale: 0.9, opacity: 0 }, 'c')
-            .from("#gallery-third .gallery-bottomText h3", { opacity: 0, x: 50 })
             .to({}, { duration: 0.4 }, "+=0");
 
         return () => {
@@ -148,4 +150,4 @@ const Gallery = () => {
     );
 };
 
-export default Gallery; 
+export default Gallery;
