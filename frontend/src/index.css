@@ -238,3 +238,6 @@ html, body {
         padding-top: 16px !important;
     }
 }
+html {
+    scrollbar-gutter: stable;
+}

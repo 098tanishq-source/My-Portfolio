@@ -13,17 +13,16 @@ const Gallery = () => {
     const pageRef = useRef(null);
 
     useEffect(() => {
-        const tl4 = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".gallery-page4",
-                start: "10% 10%",
-                end: "220% 30%",
-                scrub: 1,
-                pin: true,
-                pinSpacing: true,
-            }
-        });
-
+const tl4 = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".gallery-page4",
+        start: "10% 10%",
+        end: "220% 30%",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true,
+    }
+});
         // Set initial states via GSAP so it owns the transform — no CSS conflict
         gsap.set("#gallery-second", { xPercent: -50, yPercent: 100 });
         gsap.set("#gallery-third",  { xPercent: -50, yPercent: 100 });
