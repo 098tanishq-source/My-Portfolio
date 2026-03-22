@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+ import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import bgVid from "../../assets/earth.mp4";
 import { MailIcon, MapPinIcon, InstagramIcon, GithubIcon } from "lucide-react";

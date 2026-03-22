@@ -2,6 +2,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import Navbar from '../../components/Navbar/Navbar'
 import Hero from '../../components/Hero/Hero'
 import Welcome from '../../components/Welcome/Welcome'
 import Choose from '../../components/Choose/Choose'
@@ -21,6 +22,7 @@ const Home = () => {
 
     return (
         <div style={{ overflowX: 'hidden' }}>
+            <Navbar />
             <div style={{ position: 'relative', zIndex: 1 }}>
                 <Hero />
             </div>
